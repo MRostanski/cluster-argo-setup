@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-server
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/MRostanski/cluster-argo-setup.git
+    targetRevision: HEAD
+    path: tools
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tools
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
