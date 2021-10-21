@@ -2,3 +2,6 @@ metrics-server:
   replicas: 2
   apiService:
     insecureSkipTLSVerify: false
+  command:
+    - metrics-server
+    - --kubelet-insecure-tls
