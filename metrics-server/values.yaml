@@ -1,2 +1,4 @@
 metrics-server:
   replicas: 2
+  apiService:
+    insecureSkipTLSVerify: false

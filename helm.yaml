@@ -3,8 +3,8 @@ kind: Application
 metadata:
   name: metrics-server
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  # finalizers:
+  # - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -13,9 +13,12 @@ spec:
     path: metrics-server
     # directory:
     #   recurse: true
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: tools
+    namespace: kube-system
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
