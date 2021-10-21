@@ -18,6 +18,6 @@ spec:
       - name: echo
         image: hashicorp/http-echo:0.2.3
         args:
-        - "-text=bar"
+        - "-text=foo"
         ports:
         - containerPort: 5678
