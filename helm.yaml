@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/MRostanski/cluster-argo-setup.git
     targetRevision: HEAD
-    path: tools
+    path: tools/metrics-server
     directory:
       recurse: true
   destination:
