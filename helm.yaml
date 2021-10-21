@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/MRostanski/cluster-argo-setup.git
     targetRevision: HEAD
     path: tools
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: tools
