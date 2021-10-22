@@ -4,14 +4,19 @@ metadata:
   name: kube-state-metrics
   namespace: argocd
 spec:
+  project: default
+  source:
+    repoURL: https://github.com/MRostanski/cluster-argo-setup.git
+    targetRevision: HEAD
+    path: tools/kube-state-metrics
+    # directory:
+    #   recurse: true
+    helm:
+      valueFiles:
+        - ./values/prod.yaml
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
-  source:
-    chart: kube-state-metrics
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 3.5.2
   syncPolicy:
     automated:
       prune: true
