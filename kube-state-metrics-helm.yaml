@@ -6,18 +6,22 @@ metadata:
 spec:
   project: default
   source:
-    # helm subchart deployment pattern
-    repoURL: https://github.com/MRostanski/cluster-argo-setup.git
-    targetRevision: HEAD
-    path: tools/kube-state-metrics
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 3.5.2
+    chart: kube-state-metrics
+    #path: charts/kube-state-metrics
     # directory:
     #   recurse: true
     helm:
+      # valueFiles:
+      #   - ./ksm.yaml
       parameters:
       - name: replicas
         value: "1"
-      valueFiles:
-        - ./values/prod.yaml
+      - name: image.repository
+        value: k8s.gcr.io/kube-state-metrics/kube-state-metrics
+      - name: image.tag
+        value: v2.2.0
   destination:
     namespace: kube-system
     server: https://kubernetes.default.svc
