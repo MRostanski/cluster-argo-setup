@@ -13,11 +13,12 @@ spec:
     # directory:
     #   recurse: true
     helm:
-      parameters:
-      - name: replicas
-        value: "1"
       valueFiles:
         - ./values/prod.yaml
+      # value file parameters override
+      parameters:
+        - name: kube-state-metrics.replicas
+          value: "1"
   destination:
     namespace: kube-system
     server: https://kubernetes.default.svc
