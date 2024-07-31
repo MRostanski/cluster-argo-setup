@@ -55,8 +55,25 @@ argocd repo add git@github.com:argoproj/argocd-example-apps.git --ssh-private-ke
 
 argocd repo add https://github.com/MRostanski/cluster-argo-setup.git
 
+argocd repo add git@github.com:terraform-training/cluster-argo-setup-private.git --ssh-private-key-path ./argo_private_key
+
 # argocd app create app-manual --repo https://github.com/MRostanski/cluster-argo-setup.git --path dev --dest-namespace default
 
 kubectl apply -f application.yaml
 
+```
+
+## Git automation
+
+```bash
+git clone https://github.com/MRostanski/cluster-argo-setup.git
+
+# patching yaml
+kubectl patch --local -f echo.yaml -p '{"spec":{"template":{"spec":{"containers":[{"name":"echo","image":"hashicorp/http-echo:0.2.2"}]}}}}' -oyaml > echo.yaml
+
+# changing values for helm
+sed -i 's/tag: .*/tag: v2.2.0/' prod.yaml
+
+git add . -m "image update"
+git push
 ```
